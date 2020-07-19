@@ -3,6 +3,7 @@
 // https://github.com/nuke-build/nuke/blob/master/LICENSE
 
 using JetBrains.Annotations;
+using Nuke.CodeGeneration;
 using Nuke.CodeGeneration.Model;
 using Nuke.Common;
 using Nuke.Common.IO;
@@ -27,6 +28,21 @@ partial class Build
             EnsureCleanDirectory(ReferencesDirectory);
 
             UpdateReferences(SpecificationsDirectory, ReferencesDirectory);
+        });
+
+
+
+    [UsedImplicitly]
+    Target Bar => _ => _
+        .Executes(() =>
+        {
+            var specificationsDirectory = (AbsolutePath) SpecificationsDirectory;
+            var load = ToolSerializer.Load(specificationsDirectory / "DotNet.json");
+            CodeGenerator.ApplyRuntimeInformation(load, specificationsDirectory / "DotNet.json", null, null);
+            SerializationTasks.YamlSerializeToFile(load, specificationsDirectory / "DotNet.yaml", x =>
+            {
+                return x;
+            });
         });
 
     [UsedImplicitly]

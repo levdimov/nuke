@@ -9,6 +9,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using JetBrains.Annotations;
 using Newtonsoft.Json;
+using YamlDotNet.Serialization;
 
 namespace Nuke.CodeGeneration.Model
 {
@@ -16,13 +17,16 @@ namespace Nuke.CodeGeneration.Model
     public class DataClass : IDeprecatable
     {
         [JsonIgnore]
+        [YamlIgnore]
         public Tool Tool { get; set; }
 
         [JsonIgnore]
+        [YamlIgnore]
         public virtual bool IsToolSettingsClass => false;
 
         [NotNull]
         [JsonIgnore]
+        [YamlIgnore]
         public virtual IDeprecatable Parent => Tool;
 
         [JsonProperty(Required = Required.Always)]
@@ -57,10 +61,12 @@ namespace Nuke.CodeGeneration.Model
         public override bool IsToolSettingsClass => true;
 
         [JsonIgnore]
+        [YamlIgnore]
         public Task Task { get; set; }
 
         [NotNull]
         [JsonIgnore]
+        [YamlIgnore]
         public override IDeprecatable Parent => Task;
 
         [JsonProperty(Required = Required.Default)]

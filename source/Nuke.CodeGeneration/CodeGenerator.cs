@@ -62,7 +62,7 @@ namespace Nuke.CodeGeneration
         }
 
         // ReSharper disable once CognitiveComplexity
-        private static void ApplyRuntimeInformation(
+        public static void ApplyRuntimeInformation(
             Tool tool,
             string specificationFile,
             [CanBeNull] Func<Tool, string> sourceFileProvider,

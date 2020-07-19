@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using JetBrains.Annotations;
 using Newtonsoft.Json;
+using YamlDotNet.Serialization;
 
 namespace Nuke.CodeGeneration.Model
 {
@@ -21,15 +22,15 @@ namespace Nuke.CodeGeneration.Model
         [JsonProperty("$schema")]
         public string Schema { get; set; } = "https://raw.githubusercontent.com/nuke-build/nuke/master/source/Nuke.CodeGeneration/schema.json";
 
-        [JsonIgnore] public string SpecificationFile { get; set; }
-        [JsonIgnore] public string DefaultOutputFile => Path.ChangeExtension(SpecificationFile, "Generated.cs");
-        [JsonIgnore] public string DefaultOutputFileName => Path.GetFileName(DefaultOutputFile);
+        [JsonIgnore] [YamlIgnore] public string SpecificationFile { get; set; }
+        [JsonIgnore] [YamlIgnore] public string DefaultOutputFile => Path.ChangeExtension(SpecificationFile, "Generated.cs");
+        [JsonIgnore] [YamlIgnore] public string DefaultOutputFileName => Path.GetFileName(DefaultOutputFile);
 
-        [JsonIgnore] public string SourceFile { get; set; }
+        [JsonIgnore] [YamlIgnore] public string SourceFile { get; set; }
 
-        [JsonIgnore] public string Namespace { get; set; }
+        [JsonIgnore] [YamlIgnore] public string Namespace { get; set; }
 
-        [CanBeNull] [JsonIgnore] public IDeprecatable Parent => null;
+        [CanBeNull] [JsonIgnore] [YamlIgnore] public IDeprecatable Parent => null;
 
         [Description("Contains all references on which this definition is based on. Allows checking for updates.")]
         public List<string> References { get; set; } = new List<string>();

@@ -9,6 +9,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using JetBrains.Annotations;
 using Newtonsoft.Json;
+using YamlDotNet.Serialization;
 
 namespace Nuke.CodeGeneration.Model
 {
@@ -16,10 +17,12 @@ namespace Nuke.CodeGeneration.Model
     public class Enumeration : IDeprecatable
     {
         [JsonIgnore]
+        [YamlIgnore]
         public Tool Tool { get; set; }
 
         [NotNull]
         [JsonIgnore]
+        [YamlIgnore]
         public IDeprecatable Parent => Tool;
 
         [JsonProperty(Required = Required.Always)]

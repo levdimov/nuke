@@ -9,6 +9,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using JetBrains.Annotations;
 using Newtonsoft.Json;
+using YamlDotNet.Serialization;
 
 namespace Nuke.CodeGeneration.Model
 {
@@ -19,6 +20,7 @@ namespace Nuke.CodeGeneration.Model
         [NonSerialized] private DataClass _dataClass;
 
         [JsonIgnore]
+        [YamlIgnore]
         public DataClass DataClass
         {
             get => _dataClass;
@@ -26,6 +28,7 @@ namespace Nuke.CodeGeneration.Model
         }
 
         [JsonIgnore]
+        [YamlIgnore]
         [NotNull]
         public IDeprecatable Parent => DataClass;
 
